@@ -6,8 +6,10 @@ import Resident from '../models/residentsModel.js'
 // @access   Public
 const residentAuth =async(req,res) => {
     const {flatNo,password} = req.body
+    console.log(req.body)
     
     const user = await Resident.findOne({flatNo:flatNo})
+    console.log(user)
 
     if(user && (await user.matchPassword(password))){
         delete user.password
