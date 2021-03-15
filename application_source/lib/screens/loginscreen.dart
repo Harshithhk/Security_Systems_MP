@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mp_security_systems/ProgressHUD.dart';
 import 'package:mp_security_systems/api/api_service.dart';
 import 'package:mp_security_systems/model/login_model.dart';
-import 'package:mp_security_systems/ProgressHUD.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
@@ -34,7 +32,6 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  @override
   Widget _uiSetup(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
@@ -147,6 +144,7 @@ class _LoginPageState extends State<LoginPage> {
                                   {
                                     setState(() {
                                       isApiCallProcess = false;
+                                      print(value);
                                     })
                                   }
                               });
