@@ -26,6 +26,7 @@ dependencies:
     sdk: flutter
   dio:
   fluttertoast:
+  google_fonts:
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -48,7 +49,14 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
+  assets:
+    - assets/images/notification.png
+    - assets/images/calendar.png
+    - assets/images/festival.png
+    - assets/images/food.png
+    - assets/images/map.png
+    - assets/images/setting.png
+    - assets/images/todo.png
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -38,7 +38,11 @@ const residentSchema = mongoose.Schema({
     expecting:{
         type: [mongoose.Schema.Types.ObjectId],
         required: false,
-    }   
+    },
+    isResident:{
+        type: Boolean,
+        required: true
+    }
 },{
     timestamps: true
 })

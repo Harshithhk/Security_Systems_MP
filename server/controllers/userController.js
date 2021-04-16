@@ -6,10 +6,11 @@ import Resident from '../models/residentsModel.js'
 // @access   Public
 const residentAuth =async(req,res) => {
     const {flatNo,password} = req.body
-    console.log(req.body)
+    
     
     const user = await Resident.findOne({flatNo:flatNo})
-    console.log(user)
+    
+    
 
     if(user && (await user.matchPassword(password))){
         delete user.password
@@ -23,12 +24,13 @@ const residentAuth =async(req,res) => {
                     ownerId:user.ownerId,
                     avatar:user.avatar,
                     expecting:user.expecting,
+                    isResident: user.isResident,
                 },
             token: generateToken(user._id),
         })
     } else {
-        res.status(401)
-        throw new Error('Invalid email or password')
+        res.status(401).send('INVALID EMAIL OR PASSWORD')
+        // throw new Error('Invalid email or password')
     }
 }
 
@@ -37,13 +39,13 @@ const residentAuth =async(req,res) => {
 // @route    POST /api/users
 // @access   Public
 const registerResident =async(req,res) => {
-    const {name,password,wing,flatNo,phoneNo,isRental,ownerId,avatar} = req.body
+    const {name,password,wing,flatNo,phoneNo,isRental,ownerId,avatar,isResident} = req.body
     
     const userExists = await Resident.findOne({flatNo:flatNo})
 
     if(!userExists){
 
-        const user = await Resident.create({name,password,wing,flatNo,phoneNo,isRental,ownerId,avatar})
+        const user = await Resident.create({name,password,wing,flatNo,phoneNo,isRental,ownerId,avatar,isResident})
 
         if(user){
              delete user['password']
@@ -57,6 +59,7 @@ const registerResident =async(req,res) => {
                     ownerId:user.ownerId,
                     avatar:user.avatar,
                     expecting:user.expecting,
+                    isResident: user.isResident,
                 },
                 token: generateToken(user._id),    
             })

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mp_security_systems/ProgressHUD.dart';
 import 'package:mp_security_systems/api/api_service.dart';
 import 'package:mp_security_systems/model/login_model.dart';
+import 'package:mp_security_systems/screens/Dashboard.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
@@ -144,7 +145,14 @@ class _LoginPageState extends State<LoginPage> {
                                   {
                                     setState(() {
                                       isApiCallProcess = false;
-                                      print(value);
+                                      print(value.isResident);
+                                      if (value.isResident == false) {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => Dashboard(
+                                                    value.isResident)));
+                                      }
                                     })
                                   }
                               });

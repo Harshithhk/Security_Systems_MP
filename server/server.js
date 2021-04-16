@@ -7,6 +7,7 @@ import bodyParser from 'body-parser'
 import connectDB from './config/db.js'
 
 import userRoutes from './routes/userRoutes.js'
+import visitRoutes from './routes/visitRoutes.js'
 
 
 dotenv.config()
@@ -24,6 +25,7 @@ app.get("/", (req,res)=>{
 })
 
 app.use('/api/users',userRoutes)
+app.use('/api/visits',visitRoutes)
 
 const PORT = process.env.PORT || 5000
 
