@@ -137,7 +137,9 @@ class _AlertScreenState extends State<AlertScreen> {
                               margin: EdgeInsets.only(left: 5.0, top: 5.0),
                               color: Colors.grey[700],
                               child: Text(
-                                " RESIDENT",
+                                snapshot.data[i]["warningReason"] == "RESIDENT"
+                                    ? " RESIDENT"
+                                    : "Security",
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 18.0),
                               ),
