@@ -10,6 +10,8 @@ class CheckOut extends StatefulWidget {
 var arr = ["example1", "example2", "example3"];
 
 class CheckOutState extends State<CheckOut> {
+  APIService apiService = new APIService();
+  final _biggerFont = const TextStyle(fontSize: 18.0);
   // CheckOutRequestModel requestModel;
 
   @override
@@ -21,46 +23,30 @@ class CheckOutState extends State<CheckOut> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Check-OUT')),
-      body: SingleChildScrollView(
-        child: Container(
-          height: MediaQuery.of(context).size.height / 1,
-          child: Column(
-            children: [
-              Container(
-                alignment: Alignment.center,
-                height: 50,
-                child: Text("EXAMPLE LIST ITEM 1 "),
-              ),
-              Container(
-                alignment: Alignment.center,
-                height: 50,
-                child: Text("EXAMPLE LIST ITEM 2"),
-              ),
-              Container(
-                alignment: Alignment.center,
-                height: 50,
-                child: Text("EXAMPLE LIST ITEM 3"),
-              ),
-              Container(
-                alignment: Alignment.center,
-                height: 50,
-                child: Text("EXAMPLE LIST ITEM 4"),
-              ),
-              Container(
-                alignment: Alignment.center,
-                height: 50,
-                child: Text("EXAMPLE LIST ITEM 5"),
-              ),
-              Container(
-                alignment: Alignment.center,
-                height: 50,
-                child: Text("EXAMPLE LIST ITEM 6"),
-              ),
-            ],
-          ),
-        ),
-      ),
+        appBar: AppBar(title: Text('Check-OUT')),
+        body: FutureBuilder(
+            future: apiService.getVisits(),
+            initialData: List(),
+            builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+              return snapshot.hasData
+                  ? new ListView.builder(
+                      padding: const EdgeInsets.all(10.0),
+                      itemCount: snapshot.data.body.length,
+                      itemBuilder: (context, i) {
+                        return _buildRow(snapshot.data.body[i]);
+                      },
+                    )
+                  : Expanded(
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+            }));
+  }
+
+  Widget _buildRow(fruit) {
+    return new ListTile(
+      title: new Text(fruit.name, style: _biggerFont),
     );
   }
 }

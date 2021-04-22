@@ -146,13 +146,13 @@ class _LoginPageState extends State<LoginPage> {
                                     setState(() {
                                       isApiCallProcess = false;
                                       print(value.isResident);
-                                      if (value.isResident == false) {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) => Dashboard(
-                                                    value.isResident)));
-                                      }
+
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => Dashboard(
+                                                  value.isResident,
+                                                  value.flatNo)));
                                     })
                                   }
                               });

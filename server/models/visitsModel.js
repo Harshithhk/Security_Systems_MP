@@ -26,6 +26,15 @@ const visitSchema = mongoose.Schema({
         type: String,
         required:false,
     },
+    accepted:{
+        type: Boolean,
+        require:false,
+        default: false,
+    },
+    warningReason:{
+        type: String,
+        required: false
+    }
 },{
     timestamps: true
 })

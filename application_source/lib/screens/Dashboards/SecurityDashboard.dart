@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mp_security_systems/screens/ChecksScreens/AlertScreen.dart';
 import 'package:mp_security_systems/screens/ChecksScreens/CheckIn.dart';
 import 'package:mp_security_systems/screens/ChecksScreens/CheckOut.dart';
+import 'package:mp_security_systems/screens/ChecksScreens/ChecksOut.dart';
 
 class SecurityDashboard extends StatefulWidget {
   @override
@@ -55,7 +57,7 @@ class _SecurityDashboardState extends State<SecurityDashboard> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => CheckOut()));
+                                builder: (context) => ChecksOut()));
                       },
                       child: Text(
                         "CheckOut",
@@ -77,13 +79,13 @@ class _SecurityDashboardState extends State<SecurityDashboard> {
                 color: Colors.blue[600],
                 child: FlatButton(
                   height: 125,
-                  minWidth: 125,
+                  minWidth: 145,
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => CheckOut()));
+                        MaterialPageRoute(builder: (context) => AlertScreen()));
                   },
                   child: Text(
-                    "Dashboard",
+                    "Alerts",
                     style: TextStyle(
                         fontSize: 25.0,
                         fontWeight: FontWeight.bold,

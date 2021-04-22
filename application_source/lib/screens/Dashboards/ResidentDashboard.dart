@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:mp_security_systems/screens/ChecksScreens/CheckIn.dart';
+import 'package:mp_security_systems/screens/Visits/AcceptVisits.dart';
 
-class ResidentDashboard extends StatefulWidget {
-  @override
-  _ResidentDashboardState createState() => _ResidentDashboardState();
-}
+class ResidentDashboard extends StatelessWidget {
+  final String flatNo;
 
-class _ResidentDashboardState extends State<ResidentDashboard> {
+  ResidentDashboard(this.flatNo);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Resident Dashboard")),
       body: Container(
+        width: MediaQuery.of(context).size.width * 1,
         color: Colors.blue[50],
         child: Padding(
           padding: EdgeInsets.all(20.0),
@@ -22,14 +21,16 @@ class _ResidentDashboardState extends State<ResidentDashboard> {
                 borderRadius: BorderRadius.all(Radius.circular(15.0)),
                 color: Colors.blue[600],
                 child: FlatButton(
-                  height: 150,
-                  minWidth: 150,
+                  height: 125,
+                  minWidth: 200,
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => CheckIn()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AcceptVisits(this.flatNo)));
                   },
                   child: Text(
-                    "VISITS",
+                    "Accept Visits",
                     style: TextStyle(
                         fontSize: 25.0,
                         fontWeight: FontWeight.bold,
@@ -38,18 +39,44 @@ class _ResidentDashboardState extends State<ResidentDashboard> {
                 ),
               ),
               SizedBox(
-                width: 20.0,
+                height: 20.0,
               ),
               Material(
                 elevation: 10.0,
                 borderRadius: BorderRadius.all(Radius.circular(15.0)),
                 color: Colors.blue[600],
                 child: FlatButton(
-                  height: 150,
-                  minWidth: 150,
-                  onPressed: () {},
+                  height: 125,
+                  minWidth: 200,
+                  onPressed: () {
+                    // Navigator.push(context,
+                    //     MaterialPageRoute(builder: (context) => CheckIn()));
+                  },
                   child: Text(
-                    "EXPECTANTS",
+                    "Guests",
+                    style: TextStyle(
+                        fontSize: 25.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              Material(
+                elevation: 10.0,
+                borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                color: Colors.blue[600],
+                child: FlatButton(
+                  height: 125,
+                  minWidth: 200,
+                  onPressed: () {
+                    // Navigator.push(context,
+                    //     MaterialPageRoute(builder: (context) => CheckIn()));
+                  },
+                  child: Text(
+                    "Expectants",
                     style: TextStyle(
                         fontSize: 25.0,
                         fontWeight: FontWeight.bold,
