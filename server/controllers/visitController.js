@@ -4,15 +4,31 @@ import Visits from '../models/visitsModel.js'
 // @route    POST /api/visits/addVisit
 // @access   Public
 const addVisit =async(req,res) => {
-    const {name,phoneNo,flatNo,vehicleNo,reasonOfVisit} = req.body
+    const {name,phoneNo,flatNo,vehicleNo,reasonOfVisit,isGuest} = req.body
     
-    console.log(req.body)
+    console.log(req)
+    console.log(req.isGuest)
     // const flat = await Resident.findOne({flatNo:flatNo})
 try{
     var visit = await Visits.create(req.body)
     res.send(visit)
 }catch(err){
-    console.log(err)
+    // console.log(err)
+}
+}
+
+const addGuestVisit =async(req,res) => {
+    // const {name,phoneNo,flatNo,vehicleNo,reasonOfVisit,isGuest} = req.body
+    
+    console.log(req)
+    console.log(req.isGuest)
+    // const flat = await Resident.findOne({flatNo:flatNo})
+try{
+    req.body = {...req.body, isGuest : true}
+    var visit = await Visits.create(req.body)
+    res.send(visit)
+}catch(err){
+    // console.log(err)
 }
 }
 
@@ -43,6 +59,9 @@ const getVisits = async(req,res)=>{
         var visits
         if(!params){
              visits = await Visits.find({checkedOut :null})
+            //  if(visits.isGuest){
+            //      visits.isGuest = "true";
+            //  }
         }else if(params == "warning"){
             visits = await Visits.find({checkedOut :null,warningReason: {$ne: null}})
         }else{
@@ -64,7 +83,7 @@ const expiredVisits = async(req,res)=>{
     
     let expiredVisits=[];
     try{
-    var visits = await Visits.find({checkedOut :null})
+    var visits = await Visits.find({checkedOut :null,isGuest:false})
     visits.forEach(visit => {
 
         var diff =(new Date(Date.now()).getTime() - new Date(visit.createdAt).getTime()) / 1000;
@@ -125,4 +144,4 @@ const rejectVisit= async(req,res) =>{
 }
 
 
-export{addVisit,getVisits,checkOut,expiredVisits,confirmVisit,rejectVisit}
+export{addVisit,getVisits,checkOut,expiredVisits,confirmVisit,rejectVisit,addGuestVisit}

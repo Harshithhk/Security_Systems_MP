@@ -6,7 +6,8 @@ import {
   checkOut,
   expiredVisits,
   confirmVisit,
-  rejectVisit
+  rejectVisit,
+  addGuestVisit
   // getUserProfile,
   // updateUserProfile,
   // getUserName,
@@ -15,7 +16,8 @@ import {protect} from '../middlewares/authMiddleware.js'
 
 router.route('/').get(getVisits)
 
-router.route('/addVisit').post(addVisit)
+router.route('/addvisit').post(addVisit)
+router.route('/addGuestVisit').post(addGuestVisit)
 router.route('/checkout').post(checkOut)
 router.route('/expiredvisits').get(expiredVisits)
 router.route('/confirmVisit').post(confirmVisit)

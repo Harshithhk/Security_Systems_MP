@@ -34,7 +34,17 @@ const visitSchema = mongoose.Schema({
     warningReason:{
         type: String,
         required: false
-    }
+    },
+    isGuest:{
+        type: Boolean,
+        require:false,
+        default: false,
+    },
+    numberOfVisitors:{
+        type: Number,
+        require:false,
+        default: 1,
+    },
 },{
     timestamps: true
 })
