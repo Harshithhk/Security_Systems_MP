@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mp_security_systems/screens/Visits/AcceptVisits.dart';
+import 'package:mp_security_systems/screens/Visits/GuestVisits.dart';
 
 class ResidentDashboard extends StatelessWidget {
   final String flatNo;
@@ -49,8 +50,10 @@ class ResidentDashboard extends StatelessWidget {
                   height: 125,
                   minWidth: 200,
                   onPressed: () {
-                    // Navigator.push(context,
-                    //     MaterialPageRoute(builder: (context) => CheckIn()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => GuestVisits(this.flatNo)));
                   },
                   child: Text(
                     "Guests",

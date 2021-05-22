@@ -8,6 +8,12 @@ class CheckIn extends StatefulWidget {
 }
 
 class CheckInState extends State<CheckIn> {
+  bool isGuest = false;
+  String name = "";
+  int phoneNo;
+  String flatNo = "";
+  String vehicleNo = "";
+  String reasonOfVisit = "";
   CheckInRequestModel requestModel;
 
   @override
@@ -47,6 +53,9 @@ class CheckInState extends State<CheckIn> {
                       ),
                       onChanged: (value) {
                         requestModel.name = value;
+                        setState(() {
+                          name = value;
+                        });
                       },
                     ),
                   ),
@@ -69,6 +78,9 @@ class CheckInState extends State<CheckIn> {
                       ),
                       onChanged: (value) {
                         requestModel.phoneNo = value as int;
+                        setState(() {
+                          phoneNo = value as int;
+                        });
                       },
                     ),
                   ),
@@ -91,6 +103,9 @@ class CheckInState extends State<CheckIn> {
                       ),
                       onChanged: (value) {
                         requestModel.flatNo = value;
+                        setState(() {
+                          flatNo = value;
+                        });
                       },
                     ),
                   ),
@@ -113,6 +128,9 @@ class CheckInState extends State<CheckIn> {
                       ),
                       onChanged: (value) {
                         requestModel.vehicleNo = value;
+                        setState(() {
+                          vehicleNo = value;
+                        });
                       },
                     ),
                   ),
@@ -135,9 +153,25 @@ class CheckInState extends State<CheckIn> {
                       ),
                       onChanged: (value) {
                         requestModel.reasonOfVisit = value;
+                        setState(() {
+                          reasonOfVisit = value;
+                        });
                       },
                     ),
                   ),
+                  Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 16),
+                      child: CheckboxListTile(
+                        title: Text("Guest"),
+                        controlAffinity: ListTileControlAffinity.leading,
+                        value: isGuest,
+                        onChanged: (bool value) {
+                          setState(() {
+                            isGuest = value;
+                          });
+                        },
+                      )),
                 ],
               ),
               Row(
@@ -152,13 +186,17 @@ class CheckInState extends State<CheckIn> {
                       height: 40,
                       minWidth: 100,
                       onPressed: () {
-                        print(requestModel.toJson());
-
                         APIService apiService = new APIService();
-                        print("REQ");
-                        apiService
-                            .addVisit(requestModel)
-                            .then((value) => {print(value)});
+                        if (isGuest == false) {
+                          print(requestModel.toJson());
+
+                          print("REQ");
+                          apiService.addVisit(requestModel).then(
+                              (value) => {Navigator.of(context).pop(context)});
+                        } else {
+                          apiService.addGuestVisit(requestModel).then(
+                              (value) => {Navigator.of(context).pop(context)});
+                        }
                       },
                       child: Center(
                         child: Text(

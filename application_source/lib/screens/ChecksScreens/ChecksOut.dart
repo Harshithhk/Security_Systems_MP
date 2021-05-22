@@ -14,17 +14,13 @@ class ChecksOut extends StatefulWidget {
 }
 
 class _ChecksOutState extends State<ChecksOut> {
+  APIService apiService = new APIService();
   List notifications = [];
   var timer;
 
-  Future<List> getData() async {
-    var res = await http.get("https://da1d98476808.ngrok.io/api/visits/");
-    return json.decode(res.body);
-  }
-
   Future<void> getExpiredVisits() async {
     var res = await http
-        .get("https://da1d98476808.ngrok.io/api/visits/expiredvisits");
+        .get("https://3690b00ada8d.ngrok.io/api/visits/expiredvisits");
     setState(() {
       notifications = json.decode(res.body);
     });
@@ -56,6 +52,7 @@ class _ChecksOutState extends State<ChecksOut> {
         actions: [
           FlatButton(
             onPressed: () {
+              timer.cancel();
               Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -112,9 +109,12 @@ class _ChecksOutState extends State<ChecksOut> {
                   itemBuilder: (context, i) {
                     return Container(
                       margin: EdgeInsets.all(12.0),
-                      color: Colors.cyan[700],
+                      color: snapshot.data[i]["isGuest"] == true
+                          ? Colors.green
+                          : Colors.cyan[700],
                       child: FlatButton(
                         onPressed: () {
+                          timer.cancel();
                           showDialog(
                             context: context,
                             builder: (context) => AlertDialog(
@@ -228,7 +228,7 @@ class _ChecksOutState extends State<ChecksOut> {
             );
           }
         },
-        future: getData(),
+        future: apiService.getData(),
       ),
     );
   }

@@ -5,7 +5,8 @@ import 'dart:convert';
 import '../model/login_model.dart';
 
 class APIService {
-  String url = "https://da1d98476808.ngrok.io/api";
+  // String url = "https://c3ac1f8e9572.ngrok.io/api";
+  String url = "https://3690b00ada8d.ngrok.io/api";
   Future<LoginResponseModel> login(LoginRequestModel requestModel) async {
     String requrl = "$url/users/loginResident";
 
@@ -35,9 +36,32 @@ class APIService {
     }
   }
 
+  Future<List> getData() async {
+    var res = await http.get("$url/visits/");
+    return json.decode(res.body);
+  }
+
   Future<CheckInResponseModel> addVisit(
       CheckInRequestModel requestModel) async {
     String requrl = "$url/visits/addVisit";
+
+    print("REQUEST");
+
+    var response = await http.post(requrl, body: requestModel.toJson());
+    print(response.body);
+    if (response.statusCode == 200 || response.statusCode == 400) {
+      return CheckInResponseModel.fromJson(
+        json.decode(response.body),
+      );
+    } else {
+      print('Failed to create VISIT!');
+      return null;
+    }
+  }
+
+  Future<CheckInResponseModel> addGuestVisit(
+      CheckInRequestModel requestModel) async {
+    String requrl = "$url/visits/addGuestVisit";
 
     print("REQUEST");
 

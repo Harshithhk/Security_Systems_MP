@@ -8,9 +8,9 @@ import 'package:mp_security_systems/screens/ChecksScreens/ExpiredVisits.dart';
 
 import '../Dashboard.dart';
 
-class AcceptVisits extends StatelessWidget {
+class GuestVisits extends StatelessWidget {
   final String flatNo;
-  AcceptVisits(this.flatNo);
+  GuestVisits(this.flatNo);
 
   List notifications = [];
   var timer;
@@ -39,7 +39,7 @@ class AcceptVisits extends StatelessWidget {
               child: ListView.builder(
                   itemCount: snapshot.data.length,
                   itemBuilder: (context, i) {
-                    if (snapshot.data[i]["isGuest"] == true) {
+                    if (snapshot.data[i]["isGuest"] == false) {
                       return Container();
                     } else {
                       return Container(

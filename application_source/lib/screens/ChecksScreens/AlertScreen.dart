@@ -18,7 +18,7 @@ class _AlertScreenState extends State<AlertScreen> {
 
   Future<List> getData() async {
     var res = await http
-        .get("https://da1d98476808.ngrok.io/api/visits/?query=warning");
+        .get("https://3690b00ada8d.ngrok.io/api/visits/?query=warning");
     return json.decode(res.body);
   }
 
